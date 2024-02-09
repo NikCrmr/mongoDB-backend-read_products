@@ -1,5 +1,25 @@
-import { products } from "../../../lib/products";
+import dbConnect from "@/db/connect";
+import Product from "@/db/models/product.js";
 
-export default function handler(request, response) {
-  return response.status(200).json(products);
+export default async function handler(request, response) {
+  await dbConnect();
+  const { id } = request.query;
+
+  if (request.method === "GET") {
+    const products = await Product.find();
+
+    return await response.status(200).json(products);
+  }
 }
+
+/*
+Switch to `pages/api/products/index.js`:
+
+- Delete the import of `lib/products`.
+- Import `dbConnect` from the `db/connect.js` file.
+- Import the `Product` model.
+- Make the `handler` function `async` and `await` the connection to the database.
+- If the `request.method` is `GET`,
+
+  - use the `Product` model to find all products and
+  - return them as a response.*/

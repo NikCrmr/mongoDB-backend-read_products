@@ -18,11 +18,21 @@ export default function ProductList() {
       <StyledHeading>Available Fishes</StyledHeading>
       <StyledList>
         {data.map((product) => (
-          <li key={product.id}>
-            <StyledLink href={`/${product.id}`}>{product.name}</StyledLink>
+          <li key={product._id}>
+            <StyledLink href={`/${product._id}`}>{product.name}</StyledLink>
           </li>
         ))}
       </StyledList>
     </>
   );
 }
+
+/* 
+Switch to `components/ProductList` and adapt the frontend:
+
+- replace all instances of `product.id` with `product._id`.
+
+Check that it works:
+
+- Reload `localhost:3000`; you should still see all fishes.
+*/
